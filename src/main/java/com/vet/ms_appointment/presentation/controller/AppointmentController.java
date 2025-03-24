@@ -1,6 +1,7 @@
 package com.vet.ms_appointment.presentation.controller;
 
 import com.vet.ms_appointment.presentation.dto.AppointmentDTO;
+import com.vet.ms_appointment.presentation.dto.AppointmentDetailDTO;
 import com.vet.ms_appointment.service.interfaces.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,11 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentDTO>> getByCustomer(@PathVariable Long customerId) {
         return ResponseEntity.ok(appointmentService.findByCustomerId(customerId));
     }
+
+    @GetMapping("/{id}/details")
+public ResponseEntity<AppointmentDetailDTO> getDetails(@PathVariable Long id) {
+    return ResponseEntity.ok(appointmentService.getDetailedById(id));
+}
 
     @PostMapping
     public ResponseEntity<AppointmentDTO> create(@Valid @RequestBody AppointmentDTO dto) {
